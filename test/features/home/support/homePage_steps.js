@@ -4,7 +4,7 @@ const assert = require("assert").strict;
 // TODO: make as argument type of browser chrome/firefox
 Given("user choses browser chrome", function () {
     console.log("from HomePage.js:Given");
-
+    this.createDriver('chrome')
   });
 
 
