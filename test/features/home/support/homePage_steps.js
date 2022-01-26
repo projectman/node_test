@@ -15,6 +15,9 @@ When("user open Home Page", function () {
   
 Then("found expected Home Page title", function () {
     this.validateTitleHome()
-    this.closeDriver();
+    
 });
 
+After(function() {
+    this.closeDriver();
+})
