@@ -1,10 +1,14 @@
-const webdriver = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-const firefox = require('selenium-webdriver/firefox');
+const {Builder, By, until} = require('selenium-webdriver');
 
-let driver = new webdriver.Builder()
+let driver = new Builder()
     .forBrowser('chrome')
-    .setChromeOptions(/* ... */)
-    .setFirefoxOptions(/* ... */)
     .build();
 
+driver.get('http://www.google.com/ncr');
+driver.findElement(By.name('q')).sendKeys('webdriver');
+driver.findElement(By.name('btnK')).click();
+
+driver.wait(until.titleIs('webdriver - Google Search'), 2000);
+
+
+driver.quit();
