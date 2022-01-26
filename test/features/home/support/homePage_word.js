@@ -16,11 +16,15 @@ class HomePage {
   
   }
 
-  openHomePage() {
+  openHomePage(browser) {
     /*
      *  Open home page URL with browser arriving as arguemnt
      */
+<<<<<<< HEAD
     console.log('open browser and get homepage url: ' + homePageData.url);
+=======
+    console.log('open browser and get homepage url');
+>>>>>>> 91d173533219abfb750e4f0ad7428f390b5908db
     this.driver.get(homePageData.url);
   }
 
