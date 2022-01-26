@@ -6,16 +6,16 @@ var { Builder, By, until } = require('selenium-webdriver')
 // Home page class: interact with web elements of home page
 // TODO: separate main class from this class
 class HomePage {
-  constructor(browser) {
+  constructor() {
     /*
       homePage - webdriver object with opened Home page 
       browser: string, name of browser: 'chrome' or 'firefox'
     */
-    this.driver = new Builder().forBrowser(browser).build();
+    this.driver = new Builder().forBrowser('chrome').build();
    
   }
 
-  openHomePage(browser) {
+  openHomePage() {
     /*
       Open home page URL with browser arriving as arguemnt
     */
@@ -34,4 +34,4 @@ class HomePage {
   }
 }
 
-module.exports = HomePage;
+setWorldConstructor(HomePage);
