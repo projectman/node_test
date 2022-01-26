@@ -1,7 +1,7 @@
 const { setWorldConstructor } = require("@cucumber/cucumber");
 require('chromedriver')
-const homePageData = require("../../data/home/elements.json")
-var { Builder, By, until } = require('selenium-webdriver')
+const homePageData = require("../../../data/home/elements.json")
+var { Builder, until } = require('selenium-webdriver')
 
 // Home page class: interact with web elements of home page
 // TODO: separate main class from this class
@@ -24,12 +24,19 @@ class HomePage {
     this.driver.get(homePageData.url);
   }
 
-  validateTitleHome() {    
-    console.log('Home Title to wait: ' + homePageData.title);
+  validateTitleHome() { 
+    /*
+      Get title of opened Home page and compare with expected Home Page title.
+    */
+    
     this.driver.wait(until.titleIs(homePageData.title), 5000)
   }
+
   // TODO: move in Suite TearDown
   closeDriver() {
+    /*
+      Clossing current web driver session. 
+    */
     this.driver.quit()
   }
 }
