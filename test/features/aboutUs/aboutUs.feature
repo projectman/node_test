@@ -6,6 +6,6 @@ Feature: Home page
         Given user choses browser chrome
         And user open Home Page
         When find link contains text "About Us" and click it
-        # "//a[contains(text(), 'About Us')]"
-        Then on opened page quantity of located Our Values elements eqal 3
-        And all expected values "Accountable, Realiable, Ethical" present in  
+        # # "//a[contains(text(), 'About Us')]"
+        # Then on opened page quantity of located Our Values elements eqal 3
+        # And all expected values "Accountable, Realiable, Ethical" present in  

@@ -16,7 +16,7 @@ class MainPage {
          *  Open home page URL with browser arriving as arguemnt
          */
         console.log('open browser and get homepage url: ' + homePageData.url);
-        this.driver.get(homePageData.url);
+        return this.driver.get(homePageData.url);
     };
 
     createDriver(browser) {
@@ -24,14 +24,14 @@ class MainPage {
          * create web driver object dependent of arrived name of:
          * browser: string, name of browser: 'chrome' or 'firefox'
          */
-        this.driver = new Builder().forBrowser(browser).build();
+        return this.driver = new Builder().forBrowser(browser).build();
     };
 
     closeDriver() {
         /*
         *  Clossing current web driver session. 
         */
-        this.driver.quit()
+        return this.driver.quit()
     };
 }
 

@@ -4,9 +4,10 @@ const { setWorldConstructor } = require("@cucumber/cucumber");
 require('chromedriver');
 const homePageData = require("../../../data/home/homePageData.json");
 const headerData = require("../../../data/home/headerData.json");
+const aboutUsData = require("../../../data/aboutUs/aboutUsData.json")
 var { until, By } = require('selenium-webdriver');
 
-class HomePage extends MainPage {
+class AboutUsPage extends MainPage {
   /*
   * Home page class: interact with web elements of
   * home page
@@ -18,19 +19,16 @@ class HomePage extends MainPage {
      * title.
      */
     
-    this.driver.wait(until.titleIs(homePageData.title), 5000)
+    return this.driver.wait(until.titleIs(homePageData.title), 5000)
   }
 
-  clickAboutUsLink() { 
-    /*
-     * Find link element "About Us" in menu header and click it. 
-     */
-    console.log('clickAboutUsLink()');
-    this.driver.wait(until.elementLocated(
-      By.xpath(headerData.aboutUs), 5000
-      )).click();
+  waitLocatedClick(textInside) {
+    console.log('will waitLocatedClick: ' + textInside);
+    const xpathLoc = "//div[@class='container']//a[contains(text(), 'About Us')]";
+    return this.driver.wait(until.elementLocated(By.xpath(xpathLoc)), 20000);
+    // this.driver.wait(until.titleIs(aboutUsData.title), 10000)
   }
 
 }
 
-setWorldConstructor(HomePage);
+setWorldConstructor(AboutUsPage);
