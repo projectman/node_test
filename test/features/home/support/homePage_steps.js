@@ -18,6 +18,8 @@ Then("found expected Home Page title", function () {
     
 });
 
+
 After(function() {
+    // console.log('instead of close driver');
     this.closeDriver();
-})
+  })
