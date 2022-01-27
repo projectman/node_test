@@ -8,7 +8,7 @@ Given("user choses browser chrome", function () {
   });
 
 
-When("user open Home Page", function () {
+Given("user open Home Page", function () {
     this.openHomePage();
     
 });
@@ -16,6 +16,21 @@ When("user open Home Page", function () {
 Then("found expected Home Page title", function () {
     this.validateTitleHome()
     
+});
+
+When('find link contains text "About Us" and click it', function () {
+  console.log('found link contains text');
+  
+});
+
+Then('on opened page quantity of located Our Values elements eqal {int}', function (quantity) {
+  console.log('quantity expected: ' + quantity);
+  
+});
+
+Then('all expected values "Accountable, Realiable, Ethical" present in', function () {
+  console.log('3 words vaidation');
+  
 });
 
 
