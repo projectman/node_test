@@ -1,4 +1,5 @@
 const { Given, When, Then, After } = require("@cucumber/cucumber");
+const assert = require("assert");
 
 
 Given("user choses browser {string}", function (chosenBrowser) {
@@ -21,6 +22,15 @@ When('find link contains text {string} and click it', function (linkText) {
 
 Then('on opened page Title will be as expected', function () {
   return this.validateAboutUsPageTitle();
+});
+
+
+Then('on opened page quantity of located Our Values elements equal {int}', 
+function (expectedValuesQty) {
+  const foundValuesQty = this.valueElementsAboutUs().then(function(foundElements) {
+    assert.equal(foundElements.length, expectedValuesQty);})
+
+  return foundValuesQty; 
 });
 
 

@@ -1,6 +1,6 @@
 const { setWorldConstructor, World, setDefaultTimeout } = require('@cucumber/cucumber');
 const { until, By } = require('selenium-webdriver');
-const { aboutUsTitle } = require('../../../data/aboutUs/aboutUsData');
+const aup = require('../../../data/aboutUs/aboutUsData');
 const hp = require('../../../data/home/homePageData');
 
 const ChromeDriver = require('../../../utilities/chromeDriver');
@@ -15,6 +15,7 @@ class CustomWorld extends World {
     constructor(options) {
         super(options);
         this.driver = null; 
+        this.foundElements = []; 
     }
 
     
@@ -69,10 +70,28 @@ class CustomWorld extends World {
      */
     validateAboutUsPageTitle() {
 
-      const expectedTitle = aboutUsTitle;
+      const expectedTitle = aup.aboutUsTitle;
       return this.driver.wait(until.titleContains(expectedTitle), utils.loc_timeout);
     }
-  
+
+    /**
+     * find all Our Value elements of About Us page
+     * @returns - {Promise} - Array of web elements as promise
+     * icon "//img[@alt='checkmark icon']" included in span element with Our Value
+     */
+    valueElementsAboutUs() {
+
+    return this.driver.wait(until.elementsLocated(By.xpath(aup.checkmarkSpan)), utils.LOC_TIMEOUT)
+
+    }
+
+    /**
+     * @return - {int} - Number of elements in list of elements
+     */
+    quantityOurValues() {
+        return this.valueElementsAboutUs.then(function(els) {return els.length})
+    }
+
 }
 
 setWorldConstructor(CustomWorld)

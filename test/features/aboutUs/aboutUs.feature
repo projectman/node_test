@@ -9,7 +9,7 @@ Feature: Validate About Us page
         And user open Home Page
         When find link contains text "About Us" and click it
         Then on opened page Title will be as expected
-        # Then on opened page quantity of located Our Values elements eqal 3
+        And on opened page quantity of located Our Values elements equal 3
         # And all expected values "Accountable, Realiable, Ethical" present in  
 
 # TODO: update scenario to examles browsers... 
