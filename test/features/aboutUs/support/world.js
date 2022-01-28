@@ -1,15 +1,14 @@
 const { setWorldConstructor, World, setDefaultTimeout } = require('@cucumber/cucumber');
 const { until, By } = require('selenium-webdriver');
-const { titleContains } = require('selenium-webdriver/lib/until');
 const { aboutUsTitle } = require('../../../data/aboutUs/aboutUsData');
-const { DEFAULT_TIMEOUT, url, homeTitle } = require('../../../data/home/homePageData');
-const homePageData = require('../../../data/home/homePageData');
+const hp = require('../../../data/home/homePageData');
+
 const ChromeDriver = require('../../../utilities/chromeDriver');
 const FirefoxDriver = require('../../../utilities/firefoxDriver');
 const MobileDriver = require('../../../utilities/mobileDriver');
-const { xpathLinkWith } = require('../../../utilities/utils');
+const utils = require('../../../utilities/utils');
 
-setDefaultTimeout(DEFAULT_TIMEOUT);
+setDefaultTimeout(hp.DEFAULT_TIMEOUT);
 
 class CustomWorld extends World {
     
@@ -20,7 +19,7 @@ class CustomWorld extends World {
 
     
     /**
-     * Selector of driver an it's constractor
+     * Selector of driver an it's constrictor
      * @param {string} browser - name from list: 'firefox', 'mobile'
      * by default in all other cases will be chosen: chrome
      * 
@@ -46,32 +45,30 @@ class CustomWorld extends World {
      */
     openHomePage() {
       console.log('Word: openHomePage');
-      return this.driver.get(url);
+      return this.driver.get(hp.url);
     }
 
+    /**
+     * Reuseable universal method. 
+     * @param {string} linkText - plain text that should be located 
+     * in link element on the page
+     * @returns 
+     */
     clickLinkWithText(linkText) {
-      const locator = xpathLinkWith(linkText);
-      console.log('locator: ' + locator);
-      return this.driver.wait(until.elementLocated(By.xpath(locator))).then(
-        function(el) {
-          
-          return el.click()
-        }
-      );
-   
-    }
+      // prototype of reusable method for framework  
+      return utils.locateAndClickElementByXpath(
+        this.driver, 
+        utils.xpathLinkWith(linkText)
+        )
+    };
     
-    // FIXME: not working !!!
+    // DEBUG: delete? 
     validateAboutUsPageTitle() {
 
       const expectedTitle = aboutUsTitle;
-      return this.driver.wait(until.titleContains(expectedTitle));
+      return this.driver.wait(until.titleContains(expectedTitle), utils.loc_timeout);
     }
   
-
-    closeDriver(){
-      return this.driver.quit();
-    }
 }
 
 setWorldConstructor(CustomWorld)
