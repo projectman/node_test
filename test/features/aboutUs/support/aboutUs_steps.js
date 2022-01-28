@@ -16,13 +16,9 @@ Given("user open Home Page", function () {
 
 When('find link contains text {string} and click it', function (linkText) {
   return this.clickLinkWithText(linkText);
+
 });
 
-Then('on opened page Title will be as expected', function () {
-  return this.validateAboutUsPageTitle();
+After(function() {
+  return this.driver.quit();
 });
-
-// After(function() {
-//   this.log('quit driver');
-//   return this.driver.quit();
-// });
