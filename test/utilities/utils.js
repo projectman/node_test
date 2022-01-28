@@ -12,7 +12,7 @@ module.exports = {
      * 
      * @param linkText - {string}  - text that included in link element 'a'
      * @returns xpath {string} locator for the link type element with 
-     * text containing recieved: var: linkText
+     * text containing received: var: linkText
      */
     xpathLinkWith(linkText) {
         return "//a[contains(text(), '" + linkText + "')]"

@@ -19,6 +19,11 @@ When('find link contains text {string} and click it', function (linkText) {
 
 });
 
+Then('on opened page Title will be as expected', function () {
+  return this.validateAboutUsPageTitle();
+});
+
+
 After(function() {
   return this.driver.quit();
 });

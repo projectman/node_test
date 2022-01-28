@@ -62,7 +62,11 @@ class CustomWorld extends World {
         )
     };
     
-    // DEBUG: delete? 
+    /**
+     * Find on opened page expected title of About Us
+     * Help to validate that opened right page
+     * @returns - {Promise} - of new WebDriver
+     */
     validateAboutUsPageTitle() {
 
       const expectedTitle = aboutUsTitle;
