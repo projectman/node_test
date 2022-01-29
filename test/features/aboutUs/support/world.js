@@ -1,44 +1,45 @@
 const { setWorldConstructor, World, setDefaultTimeout } = require('@cucumber/cucumber');
+const assert = require('assert');
 const { until, By } = require('selenium-webdriver');
 const aup = require('../../../data/aboutUs/aboutUsData');
 const hp = require('../../../data/home/homePageData');
-
-const ChromeDriver = require('../../../utilities/chromeDriver');
-const FirefoxDriver = require('../../../utilities/firefoxDriver');
-const MobileDriver = require('../../../utilities/mobileDriver');
+const capabilitiesFor = require('../../../utilities/browserCapabilities')
+const selenium = require('selenium-webdriver');
 const utils = require('../../../utilities/utils');
 
 setDefaultTimeout(hp.DEFAULT_TIMEOUT);
 
 class CustomWorld extends World {
     
-    constructor(options) {
-        super(options);
-        this.driver = null; 
-        this.foundElements = []; 
-    }
+  constructor(options) {
+      super(options);
+      this.driver = null; 
+      this.foundElements = []; 
+  }
 
-    
-    /**
-     * Selector of driver an it's constrictor
-     * @param {string} browser - name from list: 'firefox', 'mobile'
-     * by default in all other cases will be chosen: chrome
-     * 
-     * @returns {ThenableWebDriver} selenium web driver
-     */
-     choseDriverFor(browser) {
+  /**
+   * Select right capabilities with 'browser' - arrived argument
+   * @param {string} - browser_name - name of browser 
+   * from list of keys of browserCapabilities object 
+   * @returns {ThenableWebDriver} selenium web driver object
+   */
+  selectDriverWith(browser_name) {
 
-      var DriverChoice = ChromeDriver;
-      if(browser == 'firefox'){
-        DriverChoice = FirefoxDriver
+    // Validate browser in the list of keys of browserCapabilities
+    assert(
+      browser_name in capabilitiesFor,
+      `Received browser_name: ${browser_name} must be from keys of 
+      capabilitiesFor object: ${Object.keys(capabilitiesFor)}`
+    )
 
-      } else if (browser == 'mobile') {
-        DriverChoice = MobileDriver
-      };
+    this.driver = new selenium.Builder()
+    .withCapabilities(capabilitiesFor[browser_name]).build();
 
-      this.driver = new DriverChoice();
-      return this.driver; 
-    }
+    this.driver.manage().window().maximize();
+
+    return this.driver;
+  };
+
 
     /**
      * Open Home page of application and validate opening 

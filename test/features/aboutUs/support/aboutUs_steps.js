@@ -5,7 +5,7 @@ const { elementLocated, elementIsSelected } = require("selenium-webdriver/lib/un
 
 
 Given("user choses browser {string}", function (chosenBrowser) {
-    return this.choseDriverFor(chosenBrowser);
+    return this.selectDriverWith(chosenBrowser);
   });
 
 
@@ -15,10 +15,12 @@ Given("user open Home Page", function () {
 
 });
 
+
 When('find link contains text {string} and click it', function (linkText) {
   return this.clickLinkWithText(linkText);
 
 });
+
 
 Then('on opened page Title will be as expected', function () {
   return this.validateAboutUsPageTitle();
