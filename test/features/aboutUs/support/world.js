@@ -81,7 +81,10 @@ class CustomWorld extends World {
      */
     valueElementsAboutUs() {
 
-    return this.driver.wait(until.elementsLocated(By.xpath(aup.checkmarkSpan)), utils.LOC_TIMEOUT)
+      return this.driver.wait(
+        until.elementsLocated(By.xpath(aup.checkmarkSpan)), 
+        utils.LOC_TIMEOUT
+        )
 
     }
 

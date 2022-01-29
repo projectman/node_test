@@ -27,13 +27,18 @@ module.exports = {
      * @returns {Promise} of current webdriver 
      */
     locateAndClickElementByXpath(driver, xpathLocator) {
-        console.log('in utils');
+
         return driver.wait(
             until.elementLocated(By.xpath(xpathLocator)), this.LOC_TIMEOUT
             )
             .then(
           function(el) { return el.click() }
           )
+    },
+
+    matchTwoArrays(foundArray, expectedArray) {
+        console.log('much 2 arrays');
+        
     }
 
 }

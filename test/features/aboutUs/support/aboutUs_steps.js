@@ -1,5 +1,7 @@
 const { Given, When, Then, After } = require("@cucumber/cucumber");
 const assert = require("assert");
+const util = require('util');
+const { elementLocated, elementIsSelected } = require("selenium-webdriver/lib/until");
 
 
 Given("user choses browser {string}", function (chosenBrowser) {
@@ -32,6 +34,17 @@ function (expectedValuesQty) {
 
   return foundValuesQty; 
 });
+
+Then('all expected values {string} present in',
+function (expectedWords) {
+  const expectedArray = expectedWords.split(', ')
+  console.log('expected words: ' + expectedArray);
+  var elements = this.valueElementsAboutUs().then(function(els) {
+    console.log('get text:' + (els[0].getText()));
+  });
+
+  return elements; 
+})
 
 
 After(function() {
