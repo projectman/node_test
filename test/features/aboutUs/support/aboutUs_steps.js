@@ -33,12 +33,12 @@ function (expectedValuesQty) {
   return this.allOurValueElements()
   
   .then(function(foundElements) {
-      
-      // Validate the number of found element equal to expected value of elements
-      assert(
-        foundElements.length === expectedValuesQty,
-        `Found quantity of elements: ${foundElements.length} is not equal to expected: ${expectedValuesQty}`
-      );
+
+    // Validate the number of found element equal to expected value of elements
+    assert(
+      foundElements.length === expectedValuesQty,
+      `Found quantity of elements: ${foundElements.length} is not equal to expected: ${expectedValuesQty}`
+    );
   })
 });
 
@@ -55,12 +55,12 @@ function (allExpectedAsString) {
   .then(function(elements) {
     elements.forEach(
       // Get innerText attribute where name of value can be gotten
-        function(element) {element.getAttribute('innerText')
+      function(element) {element.getAttribute('innerText')
 
   // add to list of words - found word without side spaces that
   // may be used for locating in html
   .then(function(text) {foundWords.push(text);
-            return foundWords;
+    return foundWords;
   }) })
     return foundWords;
   })

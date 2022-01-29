@@ -20,6 +20,3 @@ Feature: Our Values elements on About Us page
             | mobile  |
 
 # TODO: Add re method? 
-# TODO: add capabilities: 'os', itc... in chromeDriver.js 
-# TODO: check indention size on all pages
-# TODO: delete aboutUs_fromViki.js file

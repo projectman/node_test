@@ -10,11 +10,10 @@ const utils = require('../../../utilities/utils');
 setDefaultTimeout(hp.DEFAULT_TIMEOUT);
 
 class CustomWorld extends World {
-    
+
   constructor(options) {
-      super(options);
-      this.driver = null; 
-      this.foundElements = []; 
+    super(options);
+    this.driver = null; 
   }
 
   /**
@@ -41,53 +40,53 @@ class CustomWorld extends World {
   };
 
 
-    /**
-     * Open Home page of application and validate opening 
-     * home page by waiting expected title. 
-     */
-    openHomePage() {
-      console.log('Word: openHomePage');
-      return this.driver.get(hp.url);
-    }
+  /**
+   * Open Home page of application and validate opening 
+   * home page by waiting expected title. 
+   */
+  openHomePage() {
+    console.log('Word: openHomePage');
+    return this.driver.get(hp.url);
+  }
 
-    /**
-     * Reuseable universal method. 
-     * @param {string} linkText - plain text that should be located 
-     * in link element on the page
-     * @returns 
-     */
-    clickLinkWithText(linkText) {
-      // prototype of reusable method for framework  
-      return utils.locateAndClickElementByXpath(
-        this.driver, 
-        utils.xpathLinkWith(linkText)
-        )
-    };
+  /**
+   * Reuseable universal method. 
+   * @param {string} linkText - plain text that should be located 
+   * in link element on the page
+   * @returns 
+   */
+  clickLinkWithText(linkText) {
+    // prototype of reusable method for framework  
+    return utils.locateAndClickElementByXpath(
+      this.driver, 
+      utils.xpathLinkWith(linkText)
+      )
+  };
     
-    /**
-     * Find on opened page expected title of About Us
-     * Help to validate that opened right page
-     * @returns - {Promise} - of new WebDriver
-     */
-    validateAboutUsPageTitle() {
+  /**
+   * Find on opened page expected title of About Us
+   * Help to validate that opened right page
+   * @returns - {Promise} - of new WebDriver
+   */
+  validateAboutUsPageTitle() {
 
-      const expectedTitle = aup.aboutUsTitle;
-      return this.driver.wait(until.titleContains(expectedTitle), utils.loc_timeout);
-    }
+    const expectedTitle = aup.aboutUsTitle;
+    return this.driver.wait(until.titleContains(expectedTitle), utils.loc_timeout);
+  }
 
-    /**
-     * find all Our Value elements of About Us page
-     * @returns - {Promise} - Array of web elements as promise
-     * icon "//img[@alt='checkmark icon']" included in span element with Our Value
-     */
-    allOurValueElements() {
+  /**
+   * find all Our Value elements of About Us page
+   * @returns - {Promise} - Array of web elements as promise
+   * icon "//img[@alt='checkmark icon']" included in span element with Our Value
+   */
+  allOurValueElements() {
 
-      return this.driver.wait(
-        until.elementsLocated(By.xpath(aup.checkmarkSpan)), 
-        utils.LOC_TIMEOUT
-        )
+    return this.driver.wait(
+      until.elementsLocated(By.xpath(aup.checkmarkSpan)), 
+      utils.LOC_TIMEOUT
+      )
 
-    }
+  }
 
 }
 
