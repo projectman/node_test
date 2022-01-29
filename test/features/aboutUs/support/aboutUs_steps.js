@@ -16,8 +16,10 @@ Given("user open Home Page", function () {
 
 });
 
-
-When('find link contains text {string} and click it', function (linkText) {
+// Here used variant step definition with regex syntax
+// NOTE: This step call universal method, it will recreate xpath 
+// of <a> tag element that contains text as arriving from feature as 'linkText'
+When(/^find link contains text "([^"]*)" and click it$/, function (linkText) {
   return this.clickLinkWithText(linkText);
 
 });
