@@ -19,21 +19,21 @@ class CustomWorld extends World {
 
   /**
    * Select right capabilities with 'browser' - arrived argument
-   * @param {string} - browser_name - name of browser 
+   * @param {string} - browserName - name of browser 
    * from list of keys of browserCapabilities object 
    * @returns {ThenableWebDriver} selenium web driver object
    */
-  selectDriverWith(browser_name) {
+  selectDriverWith(browserName) {
 
     // Validate browser in the list of keys of browserCapabilities
     assert(
-      browser_name in capabilitiesFor,
-      `Received browser_name: ${browser_name} must be from keys of 
+      browserName in capabilitiesFor,
+      `Received browserName: ${browserName} must be from keys of 
       capabilitiesFor object: ${Object.keys(capabilitiesFor)}`
     )
-
+    console.log(`chosen driver: ${browserName}`);
     this.driver = new selenium.Builder()
-    .withCapabilities(capabilitiesFor[browser_name]).build();
+    .withCapabilities(capabilitiesFor[browserName]).build();
 
     this.driver.manage().window().maximize();
 

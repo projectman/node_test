@@ -5,7 +5,8 @@ const { elementLocated, elementIsSelected } = require("selenium-webdriver/lib/un
 
 
 Given("user choses browser {string}", function (chosenBrowser) {
-    return this.selectDriverWith(chosenBrowser);
+  console.log(`Launched scenario for browser: ${chosenBrowser}`);
+  return this.selectDriverWith(chosenBrowser);
   });
 
 
