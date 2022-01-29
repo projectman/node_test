@@ -1,19 +1,17 @@
 const { Given, When, Then, After } = require("@cucumber/cucumber");
 const assert = require("assert");
-const util = require('util');
+const utils = require('../../../utilities/utils.js')
 const { elementLocated, elementIsSelected } = require("selenium-webdriver/lib/until");
 
 
 Given("user choses browser {string}", function (chosenBrowser) {
-
-    this.choseDriverFor(chosenBrowser);
+    return this.choseDriverFor(chosenBrowser);
   });
 
 
 Given("user open Home Page", function () {
   // return this.openHomePage();
-  console.log('AboutUs steps: Given Home page');
-  this.openHomePage();
+  return this.openHomePage();
 
 });
 
@@ -29,22 +27,54 @@ Then('on opened page Title will be as expected', function () {
 
 Then('on opened page quantity of located Our Values elements equal {int}', 
 function (expectedValuesQty) {
-  const foundValuesQty = this.valueElementsAboutUs().then(function(foundElements) {
-    assert.equal(foundElements.length, expectedValuesQty);})
-
-  return foundValuesQty; 
+  return this.allOurValueElements()
+  
+  .then(function(foundElements) {
+      
+      // Validate the number of found element equal to expected value of elements
+      assert(
+        foundElements.length === expectedValuesQty,
+        `Found quantity of elements: ${foundElements.length} is not equal to expected: ${expectedValuesQty}`
+      );
+  })
 });
 
-Then('all expected values {string} present in',
-function (expectedWords) {
-  const expectedArray = expectedWords.split(', ')
-  console.log('expected words: ' + expectedArray);
-  var elements = this.valueElementsAboutUs().then(function(els) {
-    console.log('get text:' + (els[0].getText()));
-  });
 
-  return elements; 
+Then('all expected values {string} present in', 
+function (allExpectedAsString) {
+
+  // Convert received string of words in array of strings
+  const expectedWords = allExpectedAsString.split(', ')
+
+  let foundWords = []; 
+  const foundElements = this.allOurValueElements()
+  
+  .then(function(elements) {
+    elements.forEach(
+      // Get innerText attribute where name of value can be gotten
+        function(element) {element.getAttribute('innerText')
+
+  // add to list of words - found word without side spaces that
+  // may be used for locating in html
+  .then(function(text) {foundWords.push(text);
+            return foundWords;
+  }) })
+    return foundWords;
+  })
+
+.then(function(foundWords) {
+  // validate the list of found words has the same members as expectedWords
+  return utils.arraysWithSameMemebers(foundWords, expectedWords);
 })
+  .then(function(validationResult) {
+    assert(
+      validationResult,
+      `found words ${foundWords} not match expected words: ${expectedWords}`
+    )
+  });
+  
+  return foundElements;
+});
 
 
 After(function() {

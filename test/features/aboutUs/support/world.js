@@ -79,20 +79,13 @@ class CustomWorld extends World {
      * @returns - {Promise} - Array of web elements as promise
      * icon "//img[@alt='checkmark icon']" included in span element with Our Value
      */
-    valueElementsAboutUs() {
+    allOurValueElements() {
 
       return this.driver.wait(
         until.elementsLocated(By.xpath(aup.checkmarkSpan)), 
         utils.LOC_TIMEOUT
         )
 
-    }
-
-    /**
-     * @return - {int} - Number of elements in list of elements
-     */
-    quantityOurValues() {
-        return this.valueElementsAboutUs.then(function(els) {return els.length})
     }
 
 }
