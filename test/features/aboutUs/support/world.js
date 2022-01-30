@@ -1,12 +1,13 @@
-const { setWorldConstructor, World, setDefaultTimeout } = require('@cucumber/cucumber');
+const { setWorldConstructor, World, setDefaultTimeout, Status } = require('@cucumber/cucumber');
 const assert = require('assert');
 const { until, By } = require('selenium-webdriver');
 const aup = require('../../../data/aboutUs/aboutUsData');
 const hp = require('../../../data/home/homePageData');
-const capabilitiesFor = require('../../../utilities/browserCapabilities')
+const capabilitiesFor = require('../../../utilities/browserCapabilities');
 const selenium = require('selenium-webdriver');
 const utils = require('../../../utilities/utils');
 const page = require('../../../utilities/page');
+const util = require('util');
 
 setDefaultTimeout(hp.DEFAULT_TIMEOUT);
 
@@ -48,7 +49,7 @@ class CustomWorld extends World {
   openHomePage() {
     console.log('Word: openHomePage');
     return this.driver.get(hp.url);
-  }
+  };
 
   /**
    * Reuseable universal method. 
@@ -73,7 +74,7 @@ class CustomWorld extends World {
 
     const expectedTitle = aup.aboutUsTitle;
     return this.driver.wait(until.titleContains(expectedTitle), utils.loc_timeout);
-  }
+  };
 
   /**
    * find all Our Value elements of About Us page
@@ -87,8 +88,15 @@ class CustomWorld extends World {
       utils.LOC_TIMEOUT
       )
 
-  }
+  };
 
+  /**
+   * Validate testCase.result.status, if it is === Status.FAILED:
+   * create screenshot and 
+   * execute function utils.saveScreenshot with screenShot and testCase values.  
+   * @param {testCase object} testCase 
+   * @returns - {this.driver}
+   */
 }
 
 setWorldConstructor(CustomWorld)

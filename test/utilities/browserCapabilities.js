@@ -34,10 +34,7 @@ module.exports = {
   //   os_version : 'Monterey',
   //   javascriptEnabled: true,
   //   acceptSslCerts: true,
-  //   chromeOptions: {
-  //       args: ['start-maximized', 'disable-extensions']
-  //   },
-  //   path: .path
+  //   'webdriver.firefox.bin': firefox.path
   // },
 
   // To save time on settings environment for my home machine, 

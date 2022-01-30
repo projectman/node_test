@@ -1,4 +1,6 @@
-
+const fs = require('fs');
+const util = require('util');
+const SCREEN_DIR = '../../test/reports/screens/'
 
 
 /**
@@ -44,6 +46,26 @@ module.exports = {
 
   // no unequal elements were found, result positive
   return true; 
-  }
+  },
 
+  /**
+   * Create name file for the folder reports/screens
+   * based on scenario name: testCase.pickle.name
+   * @param : {Promise} - screenshotData - data of screenshot  
+   * @param : {string} - scenarioName, name of scenario where test failed
+   * @returns : {void}
+   */
+  saveScreenshot(screenshotData, scenarioName){
+
+    // Take tike value for individual test case name, may be updated to 
+    // standard datetime stamp function. 
+    const nowTime = new Date().getTime();
+
+    const fileName = scenarioName.split(' ').join('_') + nowTime + '.png';
+    const fullPath = SCREEN_DIR + fileName;
+
+    fs.writeFileSync(fullPath, screenshotData, 'base64')
+
+
+  }
 }

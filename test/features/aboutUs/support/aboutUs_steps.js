@@ -1,8 +1,9 @@
-const { Given, When, Then, After } = require("@cucumber/cucumber");
+const { Given, When, Then, After, Status, AfterStep } = require("@cucumber/cucumber");
 const assert = require("assert");
-const utils = require('../../../utilities/utils.js')
-const { elementLocated, elementIsSelected } = require("selenium-webdriver/lib/until");
-
+const utils = require('../../../utilities/utils.js');
+const util = require('util');
+const { default: TestCaseHookDefinition } = require("@cucumber/cucumber/lib/models/test_case_hook_definition");
+const { default: TestStepHookDefinition } = require("@cucumber/cucumber/lib/models/test_step_hook_definition");
 
 Given("user choses browser {string}", function (chosenBrowser) {
   console.log(`Launched scenario for browser: ${chosenBrowser}`);
@@ -37,8 +38,9 @@ function (expectedValuesQty) {
   .then(function(foundElements) {
 
     // Validate the number of found element equal to expected value of elements
-    assert(
-      foundElements.length === expectedValuesQty,
+    assert.equal(
+      foundElements.length, 
+      expectedValuesQty,
       `Found quantity of elements: ${foundElements.length} is not equal to expected: ${expectedValuesQty}`
     );
   })
@@ -82,6 +84,18 @@ function (allExpectedAsString) {
 });
 
 
-After(function() {
-  return this.driver.quit();
+After(function(testCase) {
+
+  // Test case failed - make screenshot, save it and quit driver
+  if (testCase.result.status === Status.FAILED) {
+    
+    this.driver.takeScreenshot().then(function(screenShot) {
+      utils.saveScreenshot(screenShot, testCase.pickle.name)
+    });
+    return this.driver.quit();
+  } else {
+    // No Failed - just quit the driver
+    return this.driver.quit()
+  }
+
 });
