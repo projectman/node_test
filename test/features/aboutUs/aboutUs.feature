@@ -18,3 +18,5 @@ Feature: Our Values elements on About Us page
             | chrome  |
             | firefox |
             | mobile  |
+
+# TODO: collect NOTEs over scripts

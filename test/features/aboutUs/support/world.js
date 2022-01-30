@@ -6,6 +6,7 @@ const hp = require('../../../data/home/homePageData');
 const capabilitiesFor = require('../../../utilities/browserCapabilities')
 const selenium = require('selenium-webdriver');
 const utils = require('../../../utilities/utils');
+const page = require('../../../utilities/page');
 
 setDefaultTimeout(hp.DEFAULT_TIMEOUT);
 
@@ -57,9 +58,9 @@ class CustomWorld extends World {
    */
   clickLinkWithText(linkText) {
     // prototype of reusable method for framework  
-    return utils.locateAndClickElementByXpath(
+    return page.locateAndClickElementByXpath(
       this.driver, 
-      utils.xpathLinkWith(linkText)
+      page.xpathLinkWith(linkText)
       )
   };
     
