@@ -10,14 +10,11 @@ Feature: Our Values elements on About Us page
         And user open Home Page
         When find link contains text "About Us" and click it
         Then on opened page Title will be as expected
-        And on opened page quantity of located Our Values elements equal 33
-        # And all expected values "Accountable, Reliable, Ethical" present in  
+        And on opened page quantity of located Our Values elements equal 3
+        And all expected values "Accountable, Reliable, Ethical" present in  
 
         Examples:
             | browser |
             | chrome  |
             | firefox |
             | mobile  |
-
-# TODO: uncomment last 2 examples;
-# TODO: collect NOTEs over scripts

@@ -2,17 +2,17 @@ const { Given, When, Then, After, Status, AfterStep } = require("@cucumber/cucum
 const assert = require("assert");
 const utils = require('../../../utilities/utils.js');
 const util = require('util');
-const { default: TestCaseHookDefinition } = require("@cucumber/cucumber/lib/models/test_case_hook_definition");
-const { default: TestStepHookDefinition } = require("@cucumber/cucumber/lib/models/test_step_hook_definition");
+
 
 Given("user choses browser {string}", function (chosenBrowser) {
+  
   console.log(`Launched scenario for browser: ${chosenBrowser}`);
   return this.selectDriverWith(chosenBrowser);
   });
 
 
 Given("user open Home Page", function () {
-  // return this.openHomePage();
+
   return this.openHomePage();
 
 });
@@ -33,15 +33,15 @@ Then('on opened page Title will be as expected', function () {
 
 Then('on opened page quantity of located Our Values elements equal {int}', 
 function (expectedValuesQty) {
-  return this.allOurValueElements()
-  
-  .then(function(foundElements) {
+
+  return this.allOurValueElements().then(function(foundElements) {
 
     // Validate the number of found element equal to expected value of elements
     assert.equal(
       foundElements.length, 
       expectedValuesQty,
-      `Found quantity of elements: ${foundElements.length} is not equal to expected: ${expectedValuesQty}`
+      `Found quantity of elements: ${foundElements.length} 
+      is not equal to expected: ${expectedValuesQty}`
     );
   })
 });
@@ -61,18 +61,19 @@ function (allExpectedAsString) {
       // Get innerText attribute where name of value can be gotten
       function(element) {element.getAttribute('innerText')
 
-  // add to list of words - found word without side spaces that
-  // may be used for locating in html
-  .then(function(text) {foundWords.push(text);
-    return foundWords;
-  }) })
+        // add to list of words - found word without side spaces that
+        // may be used for locating in html
+        .then(function(text) {foundWords.push(text)}) 
+      })
+
     return foundWords;
   })
 
-.then(function(foundWords) {
-  // validate the list of found words has the same members as expectedWords
-  return utils.arraysWithSameMemebers(foundWords, expectedWords);
-})
+  .then(function(foundWords) {
+    // validate the list of found words has the same members as expectedWords
+    return utils.arraysWithSameMemebers(foundWords, expectedWords);
+  })
+
   .then(function(validationResult) {
     assert(
       validationResult,

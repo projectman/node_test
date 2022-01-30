@@ -1,6 +1,5 @@
 const fs = require('fs');
-const util = require('util');
-const SCREEN_DIR = '../../test/reports/screens/'
+const SCREEN_DIR = './test/reports/screens/'
 
 
 /**
@@ -61,11 +60,11 @@ module.exports = {
     // standard datetime stamp function. 
     const nowTime = new Date().getTime();
 
-    const fileName = scenarioName.split(' ').join('_') + nowTime + '.png';
+    const fileName = scenarioName.split(' ').join('_') + '_' + nowTime + '.png';
     const fullPath = SCREEN_DIR + fileName;
 
     fs.writeFileSync(fullPath, screenshotData, 'base64')
-
+    console.log('Screenshot file was successfully saved with path: ' + fullPath);
 
   }
 }
