@@ -18,7 +18,10 @@ module.exports = {
   arraysWithSameMemebers(array1, array2){
 
     // Validate length to protect comparing py item
-    if(array1.length != array2.length) { console.log('false 1'); return false;  };
+    if(array1.length != array2.length) { 
+      console.log(`Lengths of arrays different: ${array1.length}, ${array2}`); 
+      return false;  
+    };
 
     // Make elements in the same order
     const arr1 = array1.concat().sort();
@@ -38,7 +41,6 @@ module.exports = {
       // DEBUG DELETE
       if (element1 !== element2) {
         console.log(`Not equal elements: ${element1} with ${element2}`);
-        console.log('false from here:');
         return false
       };
     }
