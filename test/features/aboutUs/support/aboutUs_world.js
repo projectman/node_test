@@ -6,7 +6,7 @@ const hp = require('../../../data/home/homePageData');
 const capabilitiesFor = require('../../../utilities/browserCapabilities');
 const selenium = require('selenium-webdriver');
 const utils = require('../../../utilities/utils');
-const page = require('../../../utilities/page');
+const Page = require('../../../utilities/page');
 const util = require('util');
 
 setDefaultTimeout(hp.DEFAULT_TIMEOUT);
@@ -39,7 +39,9 @@ class CustomWorld extends World {
       .withCapabilities(capabilitiesFor[browserName]).build();
 
     this.driver.manage().window().maximize();
-    
+    // Initialize new Page class object with just created driver
+    this.page = new Page(this.driver);
+
     return this.driver;
   };
 
@@ -61,10 +63,9 @@ class CustomWorld extends World {
    */
   clickLinkWithText(linkText) {
     // prototype of reusable method for framework  
-    return page.locateAndClickElementByXpath(
-      this.driver, 
-      page.xpathLinkWith(linkText)
-      )
+    let locator = this.page.xpathLinkWith(linkText)
+    console.log('locator: ' + locator);
+    return this.page.locateAndClickElementByXpath(locator)
   };
     
   /**
@@ -74,8 +75,7 @@ class CustomWorld extends World {
    */
   validateAboutUsPageTitle() {
 
-    const expectedTitle = aup.aboutUsTitle;
-    return this.driver.wait(until.titleContains(expectedTitle), utils.loc_timeout);
+    return this.page.waitUntilPageContains(aup.aboutUsTitle);
   };
 
   /**
@@ -85,10 +85,7 @@ class CustomWorld extends World {
    */
   allOurValueElements() {
 
-    return this.driver.wait(
-      until.elementsLocated(By.xpath(aup.checkmarkSpan)), 
-      utils.LOC_TIMEOUT
-      )
+    return this.page.waitElementsLocatedByXpath(aup.checkmarkSpan)
   };
 }
 
