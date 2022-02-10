@@ -6,7 +6,7 @@ Feature: Our Values elements on About Us page
     all Values include expected Content
 
     Scenario Outline: Find Out Values elements to validate quantity and content
-        Given user choses browser "<browser>"
+        Given user chooses browser "<browser>"
         And user open Home Page
         When find link contains text "About Us" and click it
         Then on opened page Title will be as expected

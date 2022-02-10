@@ -1,10 +1,9 @@
-const { Given, When, Then, After, Status, AfterStep } = require("@cucumber/cucumber");
+const { Given, When, Then, After, Status } = require("@cucumber/cucumber");
 const assert = require("assert");
 const utils = require('../../../utilities/utils.js');
-const util = require('util');
 
 
-Given("user choses browser {string}", function (chosenBrowser) {
+Given("user chooses browser {string}", function (chosenBrowser) {
   
   console.log(`Launched scenario for browser: ${chosenBrowser}`);
   return this.selectDriverWith(chosenBrowser);
@@ -54,7 +53,7 @@ function (allExpectedAsString) {
   const expectedWords = allExpectedAsString.split(', ')
 
   let foundWords = []; 
-  const foundElements = this.allOurValueElements()
+  this.allOurValueElements()
   
   .then(function(elements) {
     elements.forEach(

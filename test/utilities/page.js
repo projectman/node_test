@@ -3,7 +3,7 @@ const { until, By } = require('selenium-webdriver');
 /**
  * This class includes universal methods of interaction all 
  * unique pages with Selenium WD. 
- * 
+ * @param driver - Webdriver object
  */
 class Page {
 
